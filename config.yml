@@ -1,0 +1,11 @@
+player_1:
+  name: Bob
+  ships:
+    - start: A1
+      end: B5
+
+player_2:
+  name: Joe
+  ships:
+    - start: D3
+      end: D7
