@@ -1,7 +1,10 @@
 class GuessBoard
 
-  def initialize(board_size)
-    @board_size = board_size
+  attr_reader :size, :guesses
+
+  def initialize(size)
+    @size = size
+    @guesses = {}
   end
 
   def get_guess
@@ -12,19 +15,28 @@ class GuessBoard
                else
                  "Please enter your target coordiates: "
                end
+      print prompt
       guess = gets.chomp
     end
+    guess
+  end
+
+  def mark_hit(block)
+    guesses[block] = :hit
+  end
+
+  def mark_miss(block)
+    guesses[block] = :miss
   end
 
   private
-
-  attr_reader :board_size
 
   def valid_guess?(guess)
     if guess.is_a?(String) &&
        guess =~ /\A[A-Z][0-9]+\Z/ &&
        within_board_size(guess[0].ord - 64) &&
-       within_board_size(guess[/[0-9]+/].to_i)
+       within_board_size(guess[/[0-9]+/].to_i) &&
+       not_yet_guessed(guess)
       true
     else
       false
@@ -32,6 +44,10 @@ class GuessBoard
   end
 
   def within_board_size(int)
-    int.between?(1, board_size)
+    int.between?(1, size)
+  end
+
+  def not_yet_guessed(guess)
+    !guesses.keys.include?(guess)
   end
 end
