@@ -4,6 +4,7 @@ class Game
 
   def initialize(players, screen)
     @players = players
+    @screen = screen
     @current_player_index = 0
   end
 
@@ -30,15 +31,15 @@ class Game
     current_player.all_ships_sunk?
   end
 
-  private
-
-  attr_reader :current_player_index
-
   def turn_for(player)
     screen.render_guess_for(player)
     guess = player.guess
     next_player.receive_strike_at(guess)
   end
+
+  private
+
+  attr_reader :screen, :current_player_index
 
   def advance_current_player
     @current_player_index = (current_player_index + 1) % players.size

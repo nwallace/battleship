@@ -47,4 +47,31 @@ describe Game do
       game.should be_game_over
     end
   end
+
+  describe "#turn_for" do
+    let(:player)      { double }
+    let(:next_player) { double(receive_strike_at: nil) }
+
+    before do
+      screen.stub(:render_guess_for)
+      player.stub(:guess)
+      game.stub(next_player: next_player)
+    end
+
+    it "renders the guess view for the given player" do
+      screen.should_receive(:render_guess_for).with(player)
+      game.turn_for(player)
+    end
+
+    it "gets the guess from the given player" do
+      player.should_receive(:guess)
+      game.turn_for(player)
+    end
+
+    it "strikes the next_player at the guessed location" do
+      player.should_receive(:guess).and_return("A1")
+      next_player.should_receive(:receive_strike_at).with("A1")
+      game.turn_for(player)
+    end
+  end
 end
