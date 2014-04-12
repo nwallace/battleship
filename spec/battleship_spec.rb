@@ -26,7 +26,7 @@ describe Battleship do
       expect(Player).to receive(:new).with("Bob", ship_config_1, board_1)
         .and_return(player_1=double)
       expect(Game).to receive(:new).with([player_1])
-        .and_return(double(start: nil))
+        .and_return(double(play: nil))
       Battleship.battle(config_file)
     end
   end

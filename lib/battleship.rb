@@ -9,7 +9,7 @@ class Battleship
       construct_player(player_data)
     end
     game = Game.new(players)
-    game.start
+    game.play
   end
 
   private
