@@ -6,7 +6,7 @@ class Battleship
     board_size = config_data["board_size"]
     players_data = config_data["players"]
     players = players_data.map do |player_data|
-      construct_player(player_data)
+      construct_player(player_data, GuessBoard.new(board_size))
     end
     game = Game.new(players, Screen.new)
     game.play
@@ -14,14 +14,13 @@ class Battleship
 
   private
 
-  def self.construct_player(player_data)
+  def self.construct_player(player_data, guess_board)
     name = player_data["name"]
-    ship_config = construct_ship_config(player_data["ships"])
-    board = GuessBoard.new
-    Player.new(name, ship_config, board)
+    ship_board = construct_ship_board(player_data["ships"])
+    Player.new(name, ship_board, guess_board)
   end
 
-  def self.construct_ship_config(ships_data)
+  def self.construct_ship_board(ships_data)
     ships = ships_data.map do |ship_data|
       type = ship_data["type"]
       starting_block = ship_data["start"]
