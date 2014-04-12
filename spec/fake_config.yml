@@ -1,0 +1,6 @@
+players:
+  - name: Bob
+    ships:
+      - type: destroyer
+        start: A1
+        orientation: horizontal
