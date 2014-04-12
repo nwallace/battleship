@@ -41,10 +41,10 @@ describe ConfigurationValidator do
         end.to raise_error ConfigurationError
       end
 
-      it "raises an error if board_size is more than 99" do
-        described_class.validate({"board_size" => 99})
+      it "raises an error if board_size is more than 26" do
+        described_class.validate({"board_size" => 26})
         expect do
-          described_class.validate({"board_size" => 100})
+          described_class.validate({"board_size" => 27})
         end.to raise_error ConfigurationError
       end
     end

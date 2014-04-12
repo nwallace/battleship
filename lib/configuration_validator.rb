@@ -23,8 +23,8 @@ class ConfigurationValidator
     unless board_size.is_a?(Integer)
       raise_config_error "board_size must be an integer"
     end
-    unless board_size.between?(2, 99)
-      raise_config_error "board_size.must be between 2 and 99"
+    unless board_size.between?(2, 26)
+      raise_config_error "board_size.must be between 2 and 26"
     end
   end
 
