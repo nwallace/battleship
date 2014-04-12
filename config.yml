@@ -1,3 +1,5 @@
+board_size: 10
+
 players:
   - name: Bob
     ships:

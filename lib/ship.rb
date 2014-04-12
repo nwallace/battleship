@@ -12,7 +12,6 @@ class Ship
   attr_reader :type, :occupied_blocks
 
   def initialize(type, starting_block, orientation)
-    validate_initialization_values(type, starting_block, orientation)
     @type = type
     @occupied_blocks = []
     occupy_blocks(starting_block, orientation)
@@ -21,14 +20,6 @@ class Ship
   private
 
   def validate_initialization_values(type, starting_block, orientation)
-    unless SHIP_TYPES.include?(type)
-      error_msg = "Unknown ship type #{type}"
-      raise IllegalShipConfigurationError.new(error_msg)
-    end
-    unless starting_block =~ /\A[A-Z][0-9][0-9]?\Z/
-      error_msg = "Unknown starting block #{starting_block}"
-      raise IllegalShipConfigurationError.new(error_msg)
-    end
     unless SHIP_ORIENTATIONS.include?(orientation)
       error_msg = "Unknown orientation #{orientation}"
       raise IllegalShipConfigurationError.new(error_msg)

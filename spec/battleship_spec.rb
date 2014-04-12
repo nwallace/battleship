@@ -1,6 +1,7 @@
 require "yaml"
 require_relative "../lib/battleship"
 
+class ConfigurationValidator; end
 class Player; end
 class Ship; end
 class Board; end
@@ -14,6 +15,8 @@ describe Battleship do
     let(:config_file) { "spec/fake_config.yml" }
 
     it "initializes the players from the config data and starts the game" do
+      expect(ConfigurationValidator).to receive(:validate)
+        .with(YAML.load_file(config_file))
       expect(Ship).to receive(:new).with("destroyer", "A1", "horizontal")
         .and_return(ship_1=double)
       expect(ShipBoard).to receive(:new).with([ship_1])
