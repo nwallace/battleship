@@ -37,6 +37,7 @@ class Game
   def turn_for(player)
     screen.render_guess_for(player)
     guess = player.guess
+    next_player.receive_strike_at(guess)
   end
 
   def advance_current_player

@@ -5,6 +5,10 @@ class ShipBoard < Board
     validate_ship_configuration
   end
 
+  def all_ships_sunk?
+    ships.all?(&:sunk?)
+  end
+
   private
 
   attr_reader :ships

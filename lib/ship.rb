@@ -1,3 +1,5 @@
+require 'set'
+
 class Ship
 
   SHIP_ORIENTATIONS = ["horizontal", "vertical"]
@@ -9,12 +11,27 @@ class Ship
     "patrol boat" => 2,
   }
 
-  attr_reader :type, :occupied_blocks
+  attr_reader :type, :occupied_blocks, :hit_blocks
 
   def initialize(type, starting_block, orientation)
     @type = type
-    @occupied_blocks = []
+    @occupied_blocks = Set.new
+    @hit_blocks = Set.new
     occupy_blocks(starting_block, orientation)
+  end
+
+  def sunk?
+    (occupied_blocks - hit_blocks).empty?
+  end
+
+  def receive_strike_at(block)
+    if occupies_block?(block)
+      hit_blocks << block
+    end
+  end
+
+  def occupies_block?(block)
+    occupied_blocks.include?(block)
   end
 
   private

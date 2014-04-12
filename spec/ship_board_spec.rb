@@ -6,7 +6,7 @@ describe ShipBoard do
   describe "initialization" do
     it "takes a list of ships" do
       expect do
-        ShipBoard.new([])
+        described_class.new([])
       end.not_to raise_error
     end
 
@@ -14,8 +14,24 @@ describe ShipBoard do
       ships = [double(type: "A", occupied_blocks: ["A1"]),
                double(type: "B", occupied_blocks: ["A1"])]
       expect do
-        ShipBoard.new(ships)
+        described_class.new(ships)
       end.to raise_error IllegalShipConfigurationError
+    end
+  end
+
+  describe "#all_ships_sunk?" do
+    let(:ship) { double(type: "A", occupied_blocks: ["A1"]) }
+
+    it "returns true if all of the board's ships are sunk" do
+      ship.stub(sunk?: true)
+      ships = [ship]
+      expect(described_class.new(ships).all_ships_sunk?).to be_true
+    end
+
+    it "returns false if any of the board's ships are not sunk" do
+      ship.stub(sunk?: false)
+      ships = [ship]
+      expect(described_class.new(ships).all_ships_sunk?).to be_false
     end
   end
 end
