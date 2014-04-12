@@ -1,6 +1,6 @@
 class Player
 
-  attr_reader :name
+  attr_reader :name, :guess_board, :ship_board
 
   def initialize(name, ship_board, guess_board)
     @name = name
@@ -19,8 +19,4 @@ class Player
   def receive_strike_at(block)
     ship_board.receive_strike_at(block)
   end
-
-  private
-
-  attr_reader :guess_board, :ship_board
 end

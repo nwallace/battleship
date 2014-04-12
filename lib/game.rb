@@ -20,7 +20,8 @@ class Game
   end
 
   def next_player
-    players[current_player_index + 1]
+    next_player_index = (current_player_index + 1) % players.size
+    players[next_player_index]
   end
 
   def previous_player
