@@ -9,6 +9,12 @@ class ShipBoard < Board
     ships.all?(&:sunk?)
   end
 
+  def receive_strike_at(block)
+    ships.each do |ship|
+      ship.receive_strike_at(block)
+    end
+  end
+
   private
 
   attr_reader :ships
