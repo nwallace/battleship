@@ -2,7 +2,7 @@ class Game
 
   attr_reader :players
 
-  def initialize(players)
+  def initialize(players, screen)
     @players = players
     @current_player_index = 0
   end
@@ -35,7 +35,8 @@ class Game
   attr_reader :current_player_index
 
   def turn_for(player)
-    # TODO
+    screen.render_guess_for(player)
+    guess = player.guess
   end
 
   def advance_current_player

@@ -2,12 +2,13 @@ require_relative "../lib/game"
 
 describe Game do
 
+  let(:screen)  { double }
   let(:players) { [double, double] }
-  let(:game)    { described_class.new(players) }
+  let(:game)    { described_class.new(players, screen) }
 
   describe "initialization" do
-    it "takes the list of players" do
-      game = described_class.new(players)
+    it "takes the list of players and a screen" do
+      game = described_class.new(players, screen)
       game.players.should == players
     end
   end

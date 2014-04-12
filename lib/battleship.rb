@@ -8,7 +8,7 @@ class Battleship
     players = players_data.map do |player_data|
       construct_player(player_data)
     end
-    game = Game.new(players)
+    game = Game.new(players, Screen.new)
     game.play
   end
 
