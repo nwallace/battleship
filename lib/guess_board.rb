@@ -24,15 +24,11 @@ class GuessBoard
   def mark_hit(block)
     guesses[block] = :hit
     puts "Hit!"
-    print "Press ENTER to continue..."
-    gets
   end
 
   def mark_miss(block)
     guesses[block] = :miss
     puts "Miss"
-    print "Press ENTER to continue..."
-    gets
   end
 
   private

@@ -5,9 +5,9 @@ describe ShipBoard do
   let(:ship) { double(type: "A", occupied_blocks: ["A1"]) }
 
   describe "initialization" do
-    it "takes a list of ships" do
+    it "takes a list of ships and a size" do
       expect do
-        described_class.new([])
+        described_class.new([], 1)
       end.not_to raise_error
     end
 
@@ -15,7 +15,7 @@ describe ShipBoard do
       ships = [double(type: "A", occupied_blocks: ["A1"]),
                double(type: "B", occupied_blocks: ["A1"])]
       expect do
-        described_class.new(ships)
+        described_class.new(ships, 10)
       end.to raise_error IllegalShipConfigurationError
     end
   end
@@ -24,20 +24,20 @@ describe ShipBoard do
     it "returns true if all of the board's ships are sunk" do
       ship.stub(sunk?: true)
       ships = [ship]
-      expect(described_class.new(ships).all_ships_sunk?).to be_true
+      expect(described_class.new(ships, 1).all_ships_sunk?).to be_true
     end
 
     it "returns false if any of the board's ships are not sunk" do
       ship.stub(sunk?: false)
       ships = [ship]
-      expect(described_class.new(ships).all_ships_sunk?).to be_false
+      expect(described_class.new(ships, 1).all_ships_sunk?).to be_false
     end
   end
 
   describe "#receive_strike_at" do
     it "sends the strike to the board's ships" do
       ship.should_receive(:receive_strike_at).with(block="A1")
-      ship_board = ShipBoard.new([ship])
+      ship_board = ShipBoard.new([ship], 1)
       ship_board.receive_strike_at(block)
     end
   end

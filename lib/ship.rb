@@ -4,11 +4,11 @@ class Ship
 
   SHIP_ORIENTATIONS = ["horizontal", "vertical"]
   SHIP_TYPES = {
-    "carrier" => 5,
-    "battleship" => 4,
-    "submarine" => 3,
-    "destroyer" => 3,
     "patrol boat" => 2,
+    "destroyer"   => 3,
+    "submarine"   => 3,
+    "battleship"  => 4,
+    "carrier"     => 5,
   }
 
   attr_reader :type, :occupied_blocks, :hit_blocks

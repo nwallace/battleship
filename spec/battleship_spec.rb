@@ -20,7 +20,7 @@ describe Battleship do
         .with(YAML.load_file(config_file))
       expect(Ship).to receive(:new).with("destroyer", "A1", "horizontal")
         .and_return(ship_1=double)
-      expect(ShipBoard).to receive(:new).with([ship_1])
+      expect(ShipBoard).to receive(:new).with([ship_1], 10)
         .and_return(ship_config_1=double)
       expect(GuessBoard).to receive(:new).with(10)
         .and_return(board_1=double)

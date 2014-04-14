@@ -16,7 +16,7 @@ class ShipBoard < Board
   def receive_strike_at(block)
     ships.each do |ship|
       if ship.receive_strike_at(block)
-        return true
+        return ship
       end
     end
     false
