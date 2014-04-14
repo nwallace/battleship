@@ -35,7 +35,11 @@ class Game
   def turn_for(player)
     screen.render_guess_for(player)
     guess = player.guess
-    next_player.receive_strike_at(guess)
+    if next_player.receive_strike_at(guess)
+      player.guess_board.mark_hit(guess)
+    else
+      player.guess_board.mark_miss(guess)
+    end
   end
 
   private

@@ -16,17 +16,17 @@ class Battleship
 
   def self.construct_player(player_data, guess_board)
     name = player_data["name"]
-    ship_board = construct_ship_board(player_data["ships"])
+    ship_board = construct_ship_board(player_data["ships"], guess_board.size)
     Player.new(name, ship_board, guess_board)
   end
 
-  def self.construct_ship_board(ships_data)
+  def self.construct_ship_board(ships_data, size)
     ships = ships_data.map do |ship_data|
       type = ship_data["type"]
       starting_block = ship_data["start"]
       orientation = ship_data["orientation"]
       Ship.new(type, starting_block, orientation)
     end
-    ShipBoard.new(ships)
+    ShipBoard.new(ships, size)
   end
 end
